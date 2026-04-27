@@ -1,6 +1,9 @@
 # MAVI II - Unidad 1
 **Gomez Viera Emilio Leandro**
 
+
+
+
 ## 
 Simulación física básica con Raylib + Box2D. Se spawnean cajas dinámicas con el mouse, con ángulo ajustable por teclado.
 
@@ -24,6 +27,12 @@ La consigna pide POO pero la plantilla tiene un struct y sin metodos(physicsBox)
 
 ### Velocidad de simulación vs FPS
 El worldstep y el setFPS:que pasa si los fps fluctuan, la simulación se desfasa del dibujado. Tendré que usar getframetime?
+
+## Cambios - Commit 2
+
+- `PhysicsBox` la pasé de struct a clase con constructor y `Draw()`, separada en `PhysicsBox.h` y `PhysicsBox.cpp`
+- `Ground` la pasé a un fichero solo `Ground.h` porque es una clase chica. No se si esta bien
+- `main.cpp` queda un poco mas limpio, solo inicialización y loop
 
 PD: Yo sé que me pongo neurótico con esto, pero documentar acá las dudas que me aparecen es mi mejor herramienta para ir aprendiendo.
 
