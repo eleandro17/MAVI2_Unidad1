@@ -1,38 +1,42 @@
-# MAVI II - Unidad 1
+# MAVI II - Unidad 2
 **Gomez Viera Emilio Leandro**
 
-
-
-
 ## 
-Simulación física básica con Raylib + Box2D. Se spawnean cajas dinámicas con el mouse, con ángulo ajustable por teclado.
+Simulación física básica con Raylib + Box2D. Se spawnea un proyectil inicial se orienta el angulo de disparo y se acumula impulso.
 
 ## Controles
-- `SPACE` — spawnear cajas en posición del mouse. 
-La cajita verdeclaro es para previsualizar la rotación de la caja. De todos modos tambien esta en el HUD el ángulo
-- `T` / `Q` — rotar ángulo de spawn
-- `ESC` — salir
+- `SPACE` — acumula impulso. Al soltar se aplica el impulso al proyectil
+
+- `T` / `Q` — rotar ángulo de tiro
+
+## ESTRUCTURA
+
+├── main.cpp           —  Crea entidades, corre el loop.
+├── Init.h/.cpp     — Inicialización y cierre de ventana (raylib).
+├── loopDeJuego.h/.cpp — Lógica de input y dibujo por frame.
+├── Proyectil.h/.cpp   — Entidad proyectil con física box2d.
+├── ground.h           — Suelo estático con física box2d.
+├── OtrosCuerpos.h/.cpp— StaticBodys a modo de edificios con los que choca el proyectil*
+
+*Acá me tenté de hacer una clase ContactListener para ver como funciona y reflejar visualmente como funciona. Pero tal vez se sale del scope del TP
 
 ## Problemas que surgieron
 
-### Hay un Gap visual entre cajas y suelo
-`DrawRectanglePro` y `DrawRectangleLinesEx` interpretan la posición de forma distinta. El primero usa el rect + origin como pivote, el segundo dibuja desde la esquina tal cual. Entonces calculo() el centro directo a `DrawRectanglePro` y dejar que el origin haga el offset ( que antes era una resta).
+Sigo sin saber hasta donde no tocar la estructura del template y cumplir con los requerimientos POO. En el TP anterior descontaron puntos por eso pero aún no hay claridad al respecto. Tampoco sabía que gitHUB ignoraba ciertas librerías.
 
-### Las cajas que caen a 45° justos se quedan "clavadas" en el piso. Solución: no tengo idea, supongo que es cosa de box2D de como discretiza en lo chiquito. 
+En concreto: reciclé el TP anterior, modularicé y encapsule un poco mas. Aun está a medio camino porque la inicialización de variables sigue viviendo en main, pero no quise agrandar mucho la firma de las declaraciones y llamadas.
 
-## Notas 
+##Notas
 
-### POO vs plantilla
-La consigna pide POO pero la plantilla tiene un struct y sin metodos(physicsBox). 
+#Init es mas bien una inicialización de ventana, típica de raylib, pero también pensada para inicializar audio y tal vez otras cosas.
 
-### Velocidad de simulación vs FPS
-El worldstep y el setFPS:que pasa si los fps fluctuan, la simulación se desfasa del dibujado. Tendré que usar getframetime?
+## Detalles
+- Mover lógica de carga y color al `Proyectil` (peeero rompe el encapsulamiento actual).
 
-## Cambios - Commit 2
+- Unificar Ground::Draw() y Ground::Drawground(): que los puse separados solo para probar unas cosas visuales. Que al final no llegaron a buen puerto, pero tampoco complica en nada el esquema ni la ejecuciónm
 
-- `PhysicsBox` la pasé de struct a clase con constructor y `Draw()`, separada en `PhysicsBox.h` y `PhysicsBox.cpp`
-- `Ground` la pasé a un fichero solo `Ground.h` porque es una clase chica. No se si esta bien
-- `main.cpp` queda un poco mas limpio, solo inicialización y loop
 
-PD: Yo sé que me pongo neurótico con esto, pero documentar acá las dudas que me aparecen es mi mejor herramienta para ir aprendiendo.
+
+
+
 
